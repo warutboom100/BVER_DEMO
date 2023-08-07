@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "83926962545",
+    "firebase_url": "https://poc1-nosqldata-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "poc1-nosqldata",
+    "storage_bucket": "poc1-nosqldata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83926962545:android:e04830a5941606fdab26d0",
+        "android_client_info": {
+          "package_name": "com.example.bver_app_em"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83926962545-0mbgrl3pmuupk0ergq83i46jcr0dl5u0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bver_app_em",
+            "certificate_hash": "cd7fc4f3b8cead7589457b037dc136115187c2a8"
+          }
+        },
+        {
+          "client_id": "83926962545-e8os7kheuropoj95tlntpccrghftgqiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfBTMV-VEDjKRQLe6WX8Ww2MWu5R5H7mY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83926962545-e8os7kheuropoj95tlntpccrghftgqiq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

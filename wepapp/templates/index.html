@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Tracker Dashboard</title>
+  <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <header>  
+    
+    <div class="container">
+      
+      <h1><img src="{{ url_for('static', path='img/Logo1.jpg') }}" alt="Icon" class="icon">Indoor Localization Dashboard</h1>
+      
+    </div>
+  </header>
+  
+  <main>
+    <div id="nav-list">
+      <div class="container">
+        <nav>
+          <ul>
+              <li><a href="#" class="nav-link" onclick="toggleActive(event)"><img src="{{ url_for('static', path='img/dashboard1.png') }}" alt="Home Icon" class="icon1">Dashboard</a></li>
+              <li><a href="#" class="nav-link" onclick="toggleActive(event)"><img src="{{ url_for('static', path='img/porter.png') }}" alt="Home Icon" class="icon1">Porter</a></li>
+              <li><a href="#" class="nav-link" onclick="toggleActive(event)"><img src="{{ url_for('static', path='img/booking1.png') }}" alt="Home Icon" class="icon1">Booking</a></li>
+              <li><a href="#" class="nav-link" onclick="toggleActive(event)"><img src="{{ url_for('static', path='img/help1.png') }}" alt="Home Icon" class="icon1">Help</a></li>
+              
+          </ul>
+        </nav>
+        
+      </div>
+    </div>
+    <div id="middle">
+      <div id="map-container" >
+        <img id="map" src="{{ url_for('static', path='img/maphospital.png') }}">
+        <div id="user-marker-1" class="user-marker user-marker-1"></div>
+        <div id="user-marker-2" class="user-marker user-marker-2"></div>
+        <div id="user-marker-3" class="user-marker user-marker-3"></div>
+        <div id="user-marker-4" class="user-marker user-marker-4"></div>
+      </div>
+      <div id="Porter" style="display: none;">
+        <section class="main">
+          <div class="main-top">
+            <h1>Member</h1>
+            <i class="fas fa-user-cog"></i>
+          </div>
+          <div class="users">
+            
+          </div>
+    
+          <section class="attendance">
+            <div class="attendance-list">
+              <h1>Attendance List</h1>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>Finish Time</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody id="Attendance-list-body">
+                  
+                  
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+      <!-- <img src="{{ url_for('static', path='img/mapfibo.jpg') }}" alt="Map Image"> -->
+      <div id="booking-info" style="display: none;">
+        <h2>Create a new job</h2>
+        <form action="" id="bookingForm" onsubmit="submitBookingForm(event)">
+          <div class="container-booking">
+            <h3>Jobs Information</h3>
+            <div class="form-container">
+              <div class="form-control">
+                <label for="patientName">Pick up</label>
+                <br>
+                <input type="text" id="patientName" name="patientName" placeholder="Enter Patient Name" required>
+              </div>
+              <div class="form-control">
+                <label for="destination">Destination</label>
+                <br>
+                <input type="text" id="destination" name="destination" placeholder="Enter Destination" required>
+              </div>
+              <div class="form-control">
+                <label for="jobe-priority">Job Priority</label>
+                <br>
+                <select name="jobe-priority" id="jobe-priority">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="improtent">Improtent</option>
+                  <option value="urgent">Urgent!</option>
+                </select>
+              </div>
+              <div class="form-control">
+                <label for="service-time">Service Time</label>
+                <br>
+                <select name="service-time" id="service-time">
+                  <option value="slow ">Slow </option>
+                  <option value="standard ">Standard </option>
+                  <option value="immediate">Immediate</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="container-booking1">
+            <h3>Equipment Required</h3>
+            <div class="form-container1">
+              <div class="form-control">
+                <input type="number" id="stretcher" name="stretcher" min="0" value="0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACOElEQVR4nO2UPWhTURTHf7773r35IK9SEYkWlSpiNwcLCulQXRVKY4cujtJO0cnB0s3i4EdBFJwERzdxdG1rUluLn+Ci4KBpEQUhaUsan9zkWsMjTZM0fVnyg8ODwz3n/O//XB506FAmLiPue8uWeYQYImhkxH13enSykLyT8WTEzSHEcKAChAz9Hr6d9saebXiXphdriZgC1gGvwdA1N2soEEN6qB6+KSLalRNCJH0ndaNuX04PYJvcPmBtGxvEBSccy+k1aBEj06+1E3nLskYbHNZIzocQyUonSiKiXatNWF4zLGEXI909D/3jq4qoDF3citzF+1nPEk6xuoAq62i1gOTjwj83yrju3nuWJTZabXUdUcZxnLXZ9IL3feXX7sfyTy/9asmzbfv/ClzXvStEcA7o4Qfi8QebAqqwH7gF/DDfLhonClwHVoBHwMEmenDYFC+bZuE6aiRwBfgGPAWO0wL6TLOvQMoM8WMDl4HPwAvgFLtAP/Ac+GJuKYA9wAjwCZgBBgiAQWAOeGNizuQCY7BdAvrbtYK+oB7hIRUOzwhh55UKa1sTwBMgC1wDQnX0CJmzWVM7oJSatyxrXUq1CBzbslKp8OzZxPni+NUJ70zinP4zFoBJINbEZWKmtlDZU0r5dssKIcTqeGrCO9p7whtL3WjZr9fX8495O9UcCL3UKnVBSa1S8+wQKdVCZU/bdj7WOt+jlMqU9qVUBjiyUwFAr5RqSd/ctp0PwEnahNWuwR2oxV/5bPw+U9C9OgAAAABJRU5ErkJggg==">
+                <label for="">Stretcher</label>
+              </div>
+              <div class="form-control">
+                <input type="number" id="wheelchair" name="wheelchair" min="0" value="0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAADcElEQVR4nO2XW2gUVxjHV1CwrahvgtCHUnzwwQfJiwhl0JwzM3u+md1mzzkz8ZaoadcUUbyHTURTr/GGQaOtMfWWoI2tTeol2oc0lIJoQi4ggkaDF/pQbNXWC+omu5+cXSJeos50l8YH//A9LOz/+37nP+fsmQ0E3utdEmV8IQG+h4KIEYiMo4xvp8ALc3Kiw/4fABD1FEQPZeIMgYhBGf+TgkAC4hylMz8KDIZ0K/I5YTxBgJcGBkuUiRYKomPQAAjjdelHwe94Kcr4XwTEbxRkXlYAckFGFQBl4pTapB6rMw0tv8oYgNrykxSAxet0kFEvZVjOPAqinTD+UNO0oZkyDKEgelMQ/6EIc8dnnAJhvFkUzu/d2dSFXmvl7qNpgKCckNFwTSscTiFyTLdkcu7SNRiNVeDiimrcVN+C3/566bW1uqYxcwAC/EvDdm6pRmbIxfyCKPJpc57FO23eMtx4uDn7AJqmDSVMHFANFiyJJc61tmM8Hsd+3b59B481nkRnxhdohvMxtvNIdgFo6h4QeLDue0wmk/g63b//AEtWrkVqSVxV3ZAdAJ3xycpY9U0NetGTJ3FcuLQULVGAO5o6swAAsklOn9v36NFj9KobN/9I7ZEFa6syAzDNGSN1S/bu3VeLflW2egPyWcWZARAzb5IynW9r9w3ww0/HUwPV8dzWcBZLKuv8A+hBbilT95Ue3wDNLb8P/Gtoy6meAQzgnylTZ9cF3wA/nzidHshkEQUhKYgK9VkHmeMZYKqdP4aCSNb/2OgbYOOWSjRs5291d6he1IrYvgGUjJDbWlS8KPGm8/+y7t79B6286erNac+zPkFenErEdOyAH+UGI1wZTzT94mv16vRMMd1P+19wVZKpBCzZq1vS9cMwRLfEKTPkJlrbOt44WKVUsz+92ymIFcpsWdaHFER8zYat2HPtOi5aVpY0bfmAAC9RlWvyiW8lIESOMmynTd2A1d8dwn/v3Xtl+OXuq7g8Vp5aJWW8st+rh92Pn09wf+0RlcJzJ4OXe4phkpQfEBBVFGSfYTtJtZJN23bg1+u3YEHR/D7VTN2UuSAKXvYattNh85l95es2YzDsJiiIBj+P4AWpPymEyVU6yGYz5HSbIbeLgjhKmZytSTliQE8ofywBUWvYzkUCfJcWDo8e6HvvFRhsPQVX2mnre0dmUQAAAABJRU5ErkJggg==">
+                <label for="">Wheelchair</label>
+              </div>
+              <div class="form-control">
+                <input type="number" id="walker" name="walker" min="0" value="0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACQUlEQVR4nO2XTWgTURDHN83HTGq0evDgTb14sgjRvNk17eagogdBwZwqxp1JNrXVk0hBBC/Sg+IhQkWhBxEUrAdPigfFk6Ki2B4sCD2oJ4vR+gkGbVZepVLoVpK4pAQy8Idld9j58WbevDeG0UoWs3gTWG4ZrMI3f+U/gZJMcBHt05G4KVkkvgxKxpD4AZJ44eH7voLewQoofjrnq2QUyTlk7D4GDcUGlVuPJOOo5AsQ3wSS86D4ugboGHnhK8gc/YHEt4HknPYFxR9Q8VRUSXd90S1eicSvUMm9RNpZO/86Soc3I8mshlhC1Zhy9vz9T6pvFSi5AcTvOpPuuprjI/FJUPzGsAcSiz7aA4mu9JE1ftLgi/yTbhSUPEfiizUDAPEzVHzKCMh0LYDi6XoA3sdT+QNBAcTNwjadIqP74IraAJTMxE3eFxRAp5XfMgdg51a3DgAq/gqKPwYhJPlcNwAoOaubUBBC4hOtl4J4G8Bsp4CXtwiB5CoqHgpExKVGGtGUPpSCEBJPtrchthsRLWMrRnJsDbDwftkcgKQbBcu9gqZUNQCkC2UgZ0fTANCU47BzsNLx6K4XevvEiw6Xqrg9/91Iul1NAYBM/8PIyKhnzEz8UXncwx73Z4xkr59/CFL5DbDV2ahvMEBS1M81F44fgF28Ez1Tqs4DhF4/9tCUWd/xDUlySwwbLxsGSPEutPK/IhcueeFbY16sb6iCPe6kkc2G/7kCsED/swLa4uTsB7s4Ab3uNKSL1+qakJphvwEKo5bMVsCqwAAAAABJRU5ErkJggg==">
+                <label for="">Walker</label>
+              </div>
+              <div class="form-control">
+                <input type="number" id="oxygentank" name="oxygentank" min="0" value="0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAADGElEQVR4nO2WW0gUURjH/3vmsjvrujNaCmNaCEkvRvqi3bAewkjKICswXZH0wUuGWl5AIokKhOilTLSHXqLSEjKEMrSgHrq8JSSWUZmKGqEpm5XOemK2WVmncVwLtQc/+DPDnHPm/L7LmfmA/9kIIeMAqL8YhnEvJQM97MqfUerBbB/IopgMoBBAAYAI9QEhZGypIrCV5QV3zM7MieikbIUTnD8AJGpj1ceKiqkq9f5vXk4ISXc4HKOSJI3bbLb0PyZwdrFrd+Vtmtei0NxmhW4uvDXLa72sVlvAUSCEZEqS5G5/9ITea22jYWHhUyrQ7EkMO5nT+NULkHdXofvrRihntXsGP49Svbp7PuqBFABvABwHYNHtLwmCMN7++Onv9cMjtKX1AXU6xe8ARL8IOLuSK5q8ADnNCk0suLmQCPBqCgG8AFDjv7sgCDWurOwJfwc+9A3RI5lZ06GhoRf8525heJs7ZkfGt+jtLl8NJCywBkIA9AOI9T1wBAcP3m/roLVXGmbgL9fW06bmFro6LGxE/wJZOwH52r2VsHwxaw0a8C3mg0K+sLxQrHltZA0A1HGvWSwWT2//kC6NI7Tz9Vv1NE2bOINITnC8i4pPdqee66C5jWNepZzpoPKmPR6rM7wPwBqDddW6KNF56sjQrJzg6ElwnZ/yFqVO6imJPXSWahB8IAD+Kaitu2oOQFi+VPXcaHOfMm4oVI5L8bB8UIkZAMMwyqf+YcMUsCznMXY/SOpWw24GkHtHoUnlD6l9VWSvGYAois8rKqtmQbzvHaDFJSepLMudxhFguMmNe4tofFr5nIo7UE7X7yqkDGebmicF60RRfKZGwpcClmU9shzxCsBaQwB1UtWp0/PqRFmFUR71AIGOzTLDyg2wklcAqldSgJUixMoxxL9/iKqW+0sYb/If8GlDStniAeSZ/Al9Srs2ZQRQCqDepFsqWWyAOAADWn9o2i/OaRbCKNnXh+cF2HdpiBLGsKmo1TrkbWpfql1f6jvmOY2zSxdVCLO2XBVhWI89NErdzMhyAHQD+Kldjwa0+XLYLydR+/a1/OJXAAAAAElFTkSuQmCC">
+                <label for="">Oxygen Tank</label>
+              </div>
+              <div class="form-control">
+                <input type="number" id="infusionpump" name="infusionpump" min="0" value="0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAADD0lEQVR4nNWV/UtTURjHL/1QIAT9Bf0YFUSQP/eDOCy806wlGTjzJZYhklriFN3VUnHOJmhOFMkYITQoxfeZil6n22yRI99KQkPxbVhKP/SCduJ74q4178VtOq0DH3j2PA/nfHbPs12GYRgmrX7yxO2a1/FAWTZY4ImQRw8TrJVa7UhL0FmmQEx+91aK3r4JEAt59DD7sWLv97p0XesEIN6XQ/8rAY7jDl0tfGlGLVAUGvPEJa75WEAC0bmdpxPKh909gZBe9/ZHVG57vHvTbIPlfH7j6Atw55Fl8169/TtALOTRg94YdXtost6+K4GsxmkSldeucgvcNQyp6vvnSOv0F1FQQ4+YQKKWJykVO5NczpOi54vSAkbrEuGXiSioSQmk6oeIL0v3zEk404KEQK1FU9n2jh4EWsY3/BaYnV8idufUNsbfz/0PAoYDvoKsGj6rru/PEJpnv/kt0G99Q6qMzX+xuvbZxxkw8LpSk5NUd81QmkZX93kIDYFfwbWiHrr5TtzUDQRHgDMt+Iy245PEDBj42oInr8iDpjFKw8C8TwL4YxE2L21zbRPCgcAzt6dPIEHLkxyjk9yqGqGb0vdHYQ/NKbW/HzlAjBxqeypwo5yn9erej26BpIohmsOBggBi5FATFXicml87qIj7ySvitsRADT3eAsoynm56vaTPLXC5oJvm8G0FAcTIoSYqYAsPVy1kZpKvlZWioIaeoL0NbQEKqJ9+oJsBzzedAAYTeOYkBeYzMiQFUBMTwAzg/tXGMffmuA7kMJjCFSBGDjVRgeGIiJOOyMiV9eLibYcjhxp6gjaEWFaZ7JSDZRc9JTZKSoiDZZdHZLIztMlLQFU1SiUArkMYTHzGTxTXAhAjh5qkgLeE2OFYbE7b2SS9dVdDmNEwsRWt7kjy3Ne9hmWyC9NK5RpA7F2/mN555IrGPJP4cMSFJ+E/NpdC070iz2k9LipgCwsLnVQqXQCxWE8sZzqMJ4Hr8Bd5Xuu56OyWo6KH+yoQ1GX7FwQcLLsODkTAIZeH4GAqIpeHBPvAXyLA5jMtnX9uAAAAAElFTkSuQmCC">
+                <label for="">Infusion Pump</label>
+              </div>
+              <div class="form-control">
+                <input type="number" id="other" name="other" min="0" value="0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEMklEQVR4nO1WXUwcVRTeWKNvaiI7c+/QoiI8iN0SaqsLhXu7Fhaq1gewjakktWp8MOniT02sGMG0kRrLzlAbLaAhGm0rsQ8kLfqA6YOyMEMjjQnG9MXGNKGxD1W7ljtQe8y5M7NdmGXLLsubJzkPc+bee75z7rnnO4HA/5KHEFIb1DRWRQh7ghC2VVFYSNO23BtYSVFVfj8hrIsQdo5QDplUJWxSpbwzGIw8WNBoCWH9hPLZm87YVZXwn1TKT6uUDxPKfyaU/5UGBtceUdVqZZnON3OVsIuu0zlC2YCqskhFRcUdC9eiTaGsAdc4a+WeS4rGqvNyXlRUR29Gzc5kSmsHwG0946LCmJhpMCy7NW6JbXFzdsP62pceIYSNuNciCOHbcwZQVtZ0p0r4l4Sw9kBg+6r0fz2WXWVYok+37EuGZcNC1S0xE09cO13FXx72QOSdiXQ5YiaJbomvDFP8m8lxJo22dv3hZnEa6ylwKyGEbyAkct9C++Fxu1I37QtLdexpfOwaPBqN3ZAgCDuc1XlRMSvHAlIpm0i3x8/a6w1TJHN17uk7J8+DVhwBqkWuK0pt6aIAVMo+dJH2p6fdMO3f83Xuaf3OA/KJbtzyyvFs6T+Pi4JaXY1nM0xxbLnOUdt6ExJAKPz8XM843OWPXq1W3GL506t6vPdcCi5rLSSSUFLaBFTbDO+dunDIB4BSVueknydS0Vuif8/HP0DZw81QvrYFYp/8mDowVzvquvBumYW3Tkxd6TgDt88DoGjsaRfAkNdkdMuexoO8FlseeiZ1WK521Jon35D22NFR0M1ZtvD+m2TToOxb/JYdLg9HSwZgiXfnAQgWRyrdF3DOATATxU2YRjwUD8ON3mG52uUV1LwgAbz99S+gm6J3HgDkcxf530gs2NsLUXyedo8mYc0DjbIIu76/DIZpD/lfAmGTCILSuigSSyEBvPapKaOv3PSiaxOf+wFQ3uk+xQFktUICqN+5XwJojh2V37pld/kAIOU6FMzmkFKR1QrhvGPoN9BWPw7amnrYP3zRsz/rA+C8BvaRW4wjSKnLbkDjM7Cxfo+MvnHXB070ppjVJ+GejACcjsimcQPy+XIBPNd+zHmSa1uc4pMA7G8C2UTRWLWcZCiHyI7Oy92Jf/IGsGPvAKwuaYDXP5tw715cxx6TFQAKjlEeiMcaYzeQUvMFcWj0avp3d2Cpoig87F0H8jlSKrIaEovvrhNJaOsbg+a2Xth3YiojEN2yR3wccCuhlBcRwntwmPBabEnpVgiFd0HNU3th07Y3JcmgzfsfbX0/o/NFC28pgpMMDhOh8G535PYrNpmWV/vgwHfTac7FHKY958gXExwmkM/3HZ+6gn0f6bd98NdUhafUFLZh2if1MfFQYCVkcBBWIaUiq+GIjr1dN8UXhmUfxCZz8CzcvSKOCy3/Af7VFCnE8agMAAAAAElFTkSuQmCC">
+                <label for="">Other</label>
+              </div>
+            </div>
+          </div>
+          <div class="container-booking2">
+            <h3>Note</h3>
+            <div class="form-control">
+              <textarea name="note" id="note" cols="100" rows="6" placeholder="note"></textarea>
+            </div>
+          </div>
+
+          <button id="createJobBtn" type="submit">Create Job</button>
+        </form>
+
+
+      </div>
+    </div>
+    <div id="device-list">
+      <div class="container">
+        <h2>Realtime</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last seen</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="device-list-body">
+           
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </main>
+ 
+  
+  <script src="{{ url_for('static', path='/script.js') }}"></script>
+</body>
+</html>
