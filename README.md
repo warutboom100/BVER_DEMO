@@ -10,5 +10,6 @@
 - Firebase เก็บข้อมูลตำแหน่งของผู้ใช้
 
 ### DEMO TEST APPLICATION
-https://github.com/warutboom100/BVER_DEMO/blob/main/clipdemo/trackingtest_fibo.mp4
+https://github.com/user-attachments/assets/93e7be44-3f4b-431d-a07d-4c6937082915
+
 
