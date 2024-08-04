@@ -10,9 +10,5 @@
 - Firebase เก็บข้อมูลตำแหน่งของผู้ใช้
 
 ### DEMO TEST APPLICATION
-<video width="600" controls>
-  <source src="/clipdemo/trackingtest_fibo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
+https://github.com/warutboom100/BVER_DEMO/blob/main/clipdemo/trackingtest_fibo.mp4
 
