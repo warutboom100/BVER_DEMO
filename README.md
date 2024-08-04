@@ -1,10 +1,13 @@
-# Smart Factory Learning Platform
+# DEMO Indoor localization with Mobile Application
 
-แพลตฟอร์มการเรียนรู้ที่ช่วยให้ผู้ใช้สามารถเรียนรู้และฝึกฝนเกี่ยวกับการใช้งานและการปฏิบัติงานใน Smart Factory
+เป็นระบบทดสอบการระบุตำแหน่งภายในอาคารด้วยโทรศัพท์มือถือ และ Web application สำหรับแสดงผลตำแหน่งของผู้ใช้
 
-## เริ่มต้นใช้งาน
+## Tool and Software
 
-คำแนะนำในการติดตั้งและตั้งค่าโครงการนี้บนเครื่องของคุณ
+- Flutter ใช้สำหรับทำ mobile app
+- Html , css , js สำหรับทำ Web application
+- FastAPI เป็น Web service
+- Firebase เก็บข้อมูลตำแหน่งของผู้ใช้
 
 ### ข้อกำหนดเบื้องต้น
 
